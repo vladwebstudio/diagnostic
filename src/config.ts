@@ -11,7 +11,7 @@ export const config = {
   expert: {
     name: "Кристина Вербицкая",
     initials: "КВ",
-    photo: "/images/expert.jpg",
+    photo: `${import.meta.env.BASE_URL}images/expert.jpg`,
   },
 
   hero: {
