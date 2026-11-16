@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-/** Фото з фолбеком: якщо файла в public/images немає, показуємо ініціали. */
+/** Фото с фолбеком: если файла в public/images нет, показываем инициалы. */
 export default function Photo({ src, alt, initials, className = "" }: Props) {
   const [failed, setFailed] = useState(false);
 

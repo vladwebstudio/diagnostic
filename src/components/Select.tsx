@@ -69,7 +69,7 @@ export default function Select({ id, value, options, placeholder, onChange }: Pr
                     setOpen(false);
                   }}
                   className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm transition ${
-                    active ? "bg-ink text-white" : "text-slate-700 hover:bg-canvas"
+                    active ? "bg-[rgb(var(--acc-tint))] font-semibold text-[rgb(var(--acc-dark))]" : "text-slate-700 hover:bg-canvas"
                   }`}
                 >
                   {o}

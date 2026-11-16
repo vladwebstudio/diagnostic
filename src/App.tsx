@@ -2,13 +2,16 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ProfileForm from "./components/ProfileForm";
 import LiveAnalysis from "./components/LiveAnalysis";
+import StateBlock from "./components/StateBlock";
+import ToolsBlock from "./components/ToolsBlock";
+import PlanBlock from "./components/PlanBlock";
 import { useLocalStorage } from "./lib/useLocalStorage";
 import { fromDisplay, snap, toDisplay } from "./lib/money";
 import { initialState, type ClientState } from "./lib/types";
 import type { Currency } from "./config";
 
 export default function App() {
-  const [state, setState, clear] = useLocalStorage<ClientState>("diagnostic-card:v2", initialState);
+  const [state, setState, clear] = useLocalStorage<ClientState>("diagnostic-card:kristina:v1", initialState);
   const update = (patch: Partial<ClientState>) => setState((s) => ({ ...s, ...patch }));
 
   // При смене валюты суммы подгоняем под шаг 50 в новой валюте
@@ -27,13 +30,25 @@ export default function App() {
     <div className="min-h-screen">
       <Header currency={state.currency} onCurrency={changeCurrency} />
 
-      <main className="mx-auto max-w-[1440px] space-y-4 px-4 py-4 sm:px-6">
+      <main>
+        <div className="bg-canvas">
+          <div className="mx-auto max-w-[1440px] space-y-4 px-4 py-4 sm:px-6">
         <Hero />
 
-        <div className="grid items-start gap-4 lg:grid-cols-[minmax(340px,0.8fr)_minmax(0,1.2fr)]">
-          <ProfileForm state={state} update={update} />
-          <LiveAnalysis state={state} update={update} />
+        <ProfileForm state={state} update={update} />
+        <LiveAnalysis state={state} update={update} keys={["request", "keywords", "experience", "pointA"]} />
+
+        <StateBlock state={state} update={update} />
+          </div>
         </div>
+
+        <div className="bg-canvas">
+          <div className="mx-auto max-w-[1440px] space-y-4 px-4 py-4 sm:px-6">
+        {/* Точка Б: после полного разбора «точки А» */}
+        <LiveAnalysis state={state} update={update} keys={["result", "pointB", "ideal", "why", "extra"]} title="Твоя цель и желаемый результат" />
+
+        <ToolsBlock state={state} update={update} />
+        <PlanBlock state={state} update={update} />
 
         <div className="flex justify-center py-6">
           <button
@@ -44,6 +59,8 @@ export default function App() {
           >
             Очистить
           </button>
+        </div>
+          </div>
         </div>
       </main>
     </div>
