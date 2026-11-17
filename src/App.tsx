@@ -36,9 +36,7 @@ export default function App() {
         <Hero />
 
         <div className="grid items-start gap-4 lg:grid-cols-[minmax(340px,0.8fr)_minmax(0,1.2fr)]">
-          <div className="lg:sticky lg:top-20">
-            <ProfileForm state={state} update={update} />
-          </div>
+          <ProfileForm state={state} update={update} />
           <LiveAnalysis state={state} update={update} blocks />
         </div>
 

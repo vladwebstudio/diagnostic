@@ -57,20 +57,19 @@ function BlocksView({ state, update }: Pick<Props, "state" | "update">) {
         return (
           <article key={b.title} className={`rounded-2xl border border-l-[3px] border-line bg-white p-5 ${t.bar}`}>
             <h2 className={`font-display text-xl font-semibold leading-tight ${t.title}`}>{b.title}</h2>
-            {b.keys.map((k) => {
-              const c = config.cards.find((x) => x.key === k)!;
-              return (
-                <div key={k} className="mt-4 border-t border-line pt-4 first:mt-3 first:border-t-0 first:pt-0">
-                  <h3 className="text-sm font-semibold text-ink">{c.title}</h3>
-                  <p className="mt-0.5 text-[0.8125rem] leading-snug text-slate-500">{c.question}</p>
-                  <Note
-                    placeholder={c.placeholder}
-                    value={state.notes[c.key] ?? ""}
-                    onChange={(v) => update({ notes: { ...state.notes, [c.key]: v } })}
-                  />
-                </div>
-              );
-            })}
+            <ul className="mt-3 space-y-1.5 text-[0.8125rem] leading-snug text-slate-600">
+              {b.keys.map((k) => (
+                <li key={k} className="flex gap-2">
+                  <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-slate-400" />
+                  {config.cards.find((x) => x.key === k)!.question}
+                </li>
+              ))}
+            </ul>
+            <Note
+              placeholder={b.placeholder}
+              value={state.notes[b.key] ?? ""}
+              onChange={(v) => update({ notes: { ...state.notes, [b.key]: v } })}
+            />
           </article>
         );
       })}
