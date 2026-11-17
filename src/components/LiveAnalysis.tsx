@@ -55,16 +55,11 @@ function BlocksView({ state, update }: Pick<Props, "state" | "update">) {
       {config.blocks.map((b) => {
         const t = tones[b.tone];
         return (
-          <article key={b.title} className={`rounded-2xl border border-l-[3px] border-line bg-white p-5 ${t.bar}`}>
-            <h2 className={`font-display text-xl font-semibold leading-tight ${t.title}`}>{b.title}</h2>
-            <ul className="mt-3 space-y-1.5 text-[0.8125rem] leading-snug text-slate-600">
-              {b.keys.map((k) => (
-                <li key={k} className="flex gap-2">
-                  <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-slate-400" />
-                  {config.cards.find((x) => x.key === k)!.question}
-                </li>
-              ))}
-            </ul>
+          <article key={b.title} className={`rounded-2xl border border-l-[3px] border-line bg-white p-4 ${t.bar}`}>
+            <h3 className={`text-sm font-semibold ${t.title}`}>{b.title}</h3>
+            <p className="mt-0.5 text-[0.8125rem] leading-snug text-slate-500">
+              {b.keys.map((k) => config.cards.find((x) => x.key === k)!.question).join(" ")}
+            </p>
             <Note
               placeholder={b.placeholder}
               value={state.notes[b.key] ?? ""}
