@@ -1,5 +1,6 @@
 import { config } from "../config";
 import type { ClientState } from "../lib/types";
+import { formatMoney } from "../lib/money";
 import MoneySlider from "./MoneySlider";
 import Segmented from "./Segmented";
 import Select from "./Select";
@@ -15,11 +16,12 @@ const input =
 
 export default function ProfileForm({ state, update }: Props) {
   const { intro } = config;
+  const perMonth = Math.max(0, state.incomeB - state.incomeA);
+  const multiplier = state.incomeA > 0 ? state.incomeB / state.incomeA : null;
 
   return (
     <section className="rounded-3xl bg-white p-5 shadow-card ring-1 ring-line sm:p-6">
-      <div className="grid gap-x-14 gap-y-5 lg:grid-cols-2">
-       <div className="space-y-5">
+      <div className="space-y-5">
         <div>
           <label className={label} htmlFor="client-name">{intro.nameLabel}</label>
           <input
@@ -42,8 +44,8 @@ export default function ProfileForm({ state, update }: Props) {
           />
         </div>
 
-       </div>
-       <div className="space-y-5">
+        <hr className="border-line" />
+
         <MoneySlider
           label={intro.incomeALabel}
           tone="rose"
@@ -52,6 +54,29 @@ export default function ProfileForm({ state, update }: Props) {
           currency={state.currency}
           onChange={(incomeA) => update({ incomeA })}
         />
+        <MoneySlider
+          label={intro.incomeBLabel}
+          tone="mint"
+          usd={state.incomeB}
+          maxUsd={config.limits.incomeB}
+          currency={state.currency}
+          onChange={(incomeB) => update({ incomeB })}
+        />
+
+        <div className="flex items-center justify-between rounded-2xl border border-emerald-200 bg-emerald-50/70 px-4 py-3">
+          <div>
+            <div className="text-[0.625rem] font-semibold tracking-[0.14em] text-slate-500">{intro.growthLabel}</div>
+            <div className="mt-0.5 font-mono">
+              <span className="text-xl font-bold text-emerald-600">
+                {formatMoney(perMonth, state.currency, { sign: true })}
+              </span>
+              <span className="ml-1.5 text-xs text-slate-500">/мес</span>
+            </div>
+          </div>
+          <span className="rounded-lg border border-emerald-300 bg-emerald-100 px-2.5 py-1 font-mono text-xs font-bold text-emerald-700">
+            {multiplier ? `x${multiplier.toFixed(1)}` : "x—"}
+          </span>
+        </div>
         <div>
           <span className={label}>{intro.timeLabel}</span>
           <Segmented
@@ -60,7 +85,6 @@ export default function ProfileForm({ state, update }: Props) {
             onChange={(termMonths) => update({ termMonths })}
           />
         </div>
-       </div>
       </div>
     </section>
   );

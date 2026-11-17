@@ -35,8 +35,12 @@ export default function App() {
           <div className="mx-auto max-w-[1440px] space-y-4 px-4 py-4 sm:px-6">
         <Hero />
 
-        <ProfileForm state={state} update={update} />
-        <LiveAnalysis state={state} update={update} keys={["request", "keywords", "experience", "pointA"]} />
+        <div className="grid items-start gap-4 lg:grid-cols-[minmax(340px,0.8fr)_minmax(0,1.2fr)]">
+          <div className="lg:sticky lg:top-20">
+            <ProfileForm state={state} update={update} />
+          </div>
+          <LiveAnalysis state={state} update={update} keys={["request", "keywords", "experience", "pointA", "result", "pointB", "ideal", "why", "extra"]} stack />
+        </div>
 
         <StateBlock state={state} update={update} />
           </div>
@@ -44,9 +48,6 @@ export default function App() {
 
         <div className="bg-canvas">
           <div className="mx-auto max-w-[1440px] space-y-4 px-4 py-4 sm:px-6">
-        {/* Точка Б: после полного разбора «точки А» */}
-        <LiveAnalysis state={state} update={update} keys={["result", "pointB", "ideal", "why", "extra"]} title="Твоя цель и желаемый результат" />
-
         <ToolsBlock state={state} update={update} />
         <PlanBlock state={state} update={update} />
 

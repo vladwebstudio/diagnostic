@@ -33,9 +33,9 @@ export const config = {
     namePlaceholder: "Как я могу к тебе обращаться?",
     professionLabel: "ЧЕМ ТЫ ЗАНИМАЕШЬСЯ? КАКАЯ У ТЕБЯ ПРОФЕССИЯ?",
     professionPlaceholder: "Выбери профессию...",
-    incomeALabel: "СРЕДНЕМЕСЯЧНЫЙ ЛИЧНЫЙ ДОХОД",
-    incomeBLabel: "",
-    growthLabel: "",
+    incomeALabel: "СРЕДНЕМЕСЯЧНЫЙ ЛИЧНЫЙ ДОХОД (ТОЧКА А)",
+    incomeBLabel: "ЖЕЛАЕМЫЙ ДОХОД (ТОЧКА Б)",
+    growthLabel: "НЕОБХОДИМЫЙ ПРИРОСТ",
     timeLabel: "КОГДА ТЫ ХОЧЕШЬ ДОСТИГНУТЬ ЭТОГО РЕЗУЛЬТАТА?",
     terms: [
       { label: "1 месяц", months: 1 },
