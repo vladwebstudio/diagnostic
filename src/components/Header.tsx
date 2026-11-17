@@ -9,7 +9,7 @@ interface Props {
 
 export default function Header({ currency, onCurrency }: Props) {
   const { expert } = config;
-  const currencies: Currency[] = ["KZT", "USD", "UAH", "EUR"];
+  const currencies: Currency[] = ["USD", "UAH", "EUR"];
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-canvas/85 backdrop-blur">

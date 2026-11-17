@@ -38,7 +38,7 @@ export const initialState: ClientState = {
   incomeB: 0,
   termMonths: 0,
   employment: "",
-  currency: "KZT",
+  currency: "USD",
   notes: {},
   levels: {},
   tools: {},

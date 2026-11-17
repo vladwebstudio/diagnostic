@@ -5,7 +5,7 @@
  * Фото: public/images/expert.jpg. Пока файла нет, показываются инициалы.
  */
 
-export type Currency = "KZT" | "USD" | "UAH" | "EUR";
+export type Currency = "USD" | "UAH" | "EUR";
 
 export const config = {
   expert: {
@@ -21,9 +21,9 @@ export const config = {
   },
 
   /** Курсы для пересчёта (за 1 USD). Приблизительные, обновляйте вручную. */
-  rates: { KZT: 520, USD: 1, UAH: 41.5, EUR: 0.92 } as Record<Currency, number>,
-  symbols: { KZT: "₸", USD: "$", UAH: "₴", EUR: "€" } as Record<Currency, string>,
-  currencyLabels: { KZT: "тенге", USD: "USD", UAH: "грн", EUR: "EUR" } as Record<Currency, string>,
+  rates: { USD: 1, UAH: 41.5, EUR: 0.92 } as Record<Currency, number>,
+  symbols: { USD: "$", UAH: "₴", EUR: "€" } as Record<Currency, string>,
+  currencyLabels: { USD: "USD", UAH: "грн", EUR: "EUR" } as Record<Currency, string>,
   /** Верхняя граница слайдера дохода в USD */
   limits: { incomeA: 15000, incomeB: 50000 },
 
