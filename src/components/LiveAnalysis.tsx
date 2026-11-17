@@ -39,11 +39,11 @@ function Note({ value, onChange, placeholder }: { value: string; onChange: (v: s
   return (
     <textarea
       ref={ref}
-      rows={4}
+      rows={3}
       value={value}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}
-      className="mt-3 block min-h-[7.5rem] w-full resize-none overflow-hidden rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-sm leading-relaxed outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-ink focus:bg-white"
+      className="mt-3 block min-h-[5.25rem] w-full resize-none overflow-hidden rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-sm leading-relaxed outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-ink focus:bg-white"
     />
   );
 }
