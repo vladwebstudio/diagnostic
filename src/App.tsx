@@ -39,7 +39,7 @@ export default function App() {
           <div className="lg:sticky lg:top-20">
             <ProfileForm state={state} update={update} />
           </div>
-          <LiveAnalysis state={state} update={update} keys={["request", "keywords", "experience", "pointA", "result", "pointB", "ideal", "why", "extra"]} stack />
+          <LiveAnalysis state={state} update={update} blocks />
         </div>
 
         <StateBlock state={state} update={update} />

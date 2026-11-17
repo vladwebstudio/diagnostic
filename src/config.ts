@@ -69,6 +69,14 @@ export const config = {
     { key: "extra", tone: "plain", title: "Дополнительная информация", question: "Дополнительная информация (необязательно).", placeholder: "Всё, что хочется добавить..." },
   ],
 
+  /** Правая колонка: 4 блока, в каждом несколько вопросов из cards (по key) */
+  blocks: [
+    { title: "Знакомство и запрос", tone: "rose", keys: ["request", "keywords", "experience"] },
+    { title: "Точка А и результат встречи", tone: "ink", keys: ["pointA", "result"] },
+    { title: "Желаемая Точка Б", tone: "mint", keys: ["pointB", "ideal"] },
+    { title: "Мотивация и дополнения", tone: "plain", keys: ["why", "extra"] },
+  ],
+
   /** Блок 2: «Детальный анализ твоего состояния» — 6 направлений, 5 уровней (1 = самый низкий) */
   state: {
     title: "Детальный анализ твоего состояния",

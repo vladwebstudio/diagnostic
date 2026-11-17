@@ -6,13 +6,15 @@ interface Props {
   state: ClientState;
   update: (patch: Partial<ClientState>) => void;
   /** Какие карточки показать (по key) */
-  keys: string[];
+  keys?: readonly string[];
   /** Растянуть на высоту соседней колонки */
   fill?: boolean;
   /** Заголовок блока (как у «В якому стані ви зараз?») */
   title?: string;
   /** Карточки одна под другой на всю ширину */
   stack?: boolean;
+  /** Показать 4 блока из config.blocks (несколько вопросов в одной карточке) */
+  blocks?: boolean;
 }
 
 const tones = {
@@ -46,14 +48,51 @@ function Note({ value, onChange, placeholder }: { value: string; onChange: (v: s
   );
 }
 
-export default function LiveAnalysis({ state, update, keys, fill, title, stack }: Props) {
+/** Одна карточка-блок на несколько вопросов: вопросы разделены тонкой линией */
+function BlocksView({ state, update }: Pick<Props, "state" | "update">) {
+  return (
+    <div className="grid gap-3">
+      {config.blocks.map((b) => {
+        const t = tones[b.tone];
+        return (
+          <article key={b.title} className={`rounded-2xl border border-l-[3px] border-line bg-white p-5 ${t.bar}`}>
+            <h2 className={`font-display text-xl font-semibold leading-tight ${t.title}`}>{b.title}</h2>
+            {b.keys.map((k) => {
+              const c = config.cards.find((x) => x.key === k)!;
+              return (
+                <div key={k} className="mt-4 border-t border-line pt-4 first:mt-3 first:border-t-0 first:pt-0">
+                  <h3 className="text-sm font-semibold text-ink">{c.title}</h3>
+                  <p className="mt-0.5 text-[0.8125rem] leading-snug text-slate-500">{c.question}</p>
+                  <Note
+                    placeholder={c.placeholder}
+                    value={state.notes[c.key] ?? ""}
+                    onChange={(v) => update({ notes: { ...state.notes, [c.key]: v } })}
+                  />
+                </div>
+              );
+            })}
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function LiveAnalysis({ state, update, keys, fill, title, stack, blocks }: Props) {
+  if (blocks) {
+    return (
+      <section className="rounded-3xl bg-white p-5 shadow-card ring-1 ring-line sm:p-6">
+        <BlocksView state={state} update={update} />
+      </section>
+    );
+  }
   return (
     <section className={`rounded-3xl bg-white p-5 shadow-card ring-1 ring-line ${title ? "sm:p-7" : "sm:p-6"}`}>
       {title && (
         <h2 className="mb-5 [font-variant-numeric:lining-nums] font-display text-2xl font-semibold leading-tight tracking-tight sm:text-[1.75rem]">{title}</h2>
       )}
       <div className={fill ? "flex flex-col" : stack ? "grid gap-3" : "grid gap-3 lg:grid-cols-2"}>
-        {keys.map((k) => config.cards.find((x) => x.key === k)!).map((c, i) => {
+        {(keys ?? []).map((k) => config.cards.find((x) => x.key === k)!).map((c, i) => {
           const t = tones[c.tone];
           const note = (
             <Note
