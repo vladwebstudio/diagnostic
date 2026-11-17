@@ -5,7 +5,16 @@ export function useLocalStorage<T>(key: string, initial: T) {
   const [value, setValue] = useState<T>(() => {
     try {
       const raw = localStorage.getItem(key);
-      return raw ? ({ ...initial, ...JSON.parse(raw) } as T) : initial;
+      if (!raw) return initial;
+      const saved = { ...initial, ...JSON.parse(raw) } as T & { currency?: string; incomeA?: number; incomeB?: number };
+      // Старые данные (напр. удалённая валюта) или битые числа -> сбрасываем суммы и валюту
+      const okCur = ["USD", "UAH", "EUR"].includes(String(saved.currency));
+      const okNum = Number.isFinite(saved.incomeA) && Number.isFinite(saved.incomeB);
+      if (!okCur || !okNum) {
+        const init = initial as unknown as { currency: string; incomeA: number; incomeB: number };
+        return { ...saved, currency: init.currency, incomeA: init.incomeA, incomeB: init.incomeB } as T;
+      }
+      return saved as T;
     } catch {
       return initial;
     }
