@@ -71,10 +71,10 @@ export const config = {
 
   /** Правая колонка: 4 блока, в каждом список вопросов из cards (по key) и одно поле для ответов */
   blocks: [
-    { key: "b1", placeholder: "Ответы клиента во время разговора...", title: "Знакомство и запрос", tone: "plain", keys: ["request", "keywords", "experience"] },
-    { key: "b2", placeholder: "Ответы клиента во время разговора...", title: "Точка А", tone: "rose", keys: ["pointA"] },
-    { key: "b3", placeholder: "Ответы клиента во время разговора...", title: "Мотивация и дополнения", tone: "ink", keys: ["why", "extra"] },
-    { key: "b4", placeholder: "Ответы клиента во время разговора...", title: "Точка Б и результат встречи", tone: "mint", keys: ["result", "pointB", "ideal"] },
+    { key: "b1", placeholder: "Запишите ответ...", title: "Знакомство и запрос", tone: "plain", keys: ["request", "keywords", "experience"] },
+    { key: "b2", placeholder: "Запишите ответ...", title: "Точка А", tone: "rose", keys: ["pointA"] },
+    { key: "b3", placeholder: "Запишите ответ...", title: "Мотивация и дополнения", tone: "ink", keys: ["why", "extra"] },
+    { key: "b4", placeholder: "Запишите ответ...", title: "Точка Б и результат встречи", tone: "mint", keys: ["result", "pointB", "ideal"] },
   ],
 
   /** Блок 2: «Детальный анализ твоего состояния» — 6 направлений, 5 уровней (1 = самый низкий) */
